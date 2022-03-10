@@ -20,26 +20,26 @@ class UserController extends Controller
         // $url = json_decode(file_get_contents("http://api.ipinfodb.com/v3/ip-city/?key=/*userapikey*/
         // // you can get your api key form http://ipinfodb.com/
         // ip=".$_SERVER['REMOTE_ADDR']."&format=json"));
-
-        $url = json_decode(file_get_contents("http://api.ipinfodb.com/v3/ip-city/?key=02d06daff139466bba306d936a7f55f6aefc3f43b8a121ce0775db5b16b6beb3"."&format=json"));
         
-        return view('user', compact('url'));
-    }
+        //mengambil data lokasi user
+        $url = json_decode(file_get_contents("http://api.ipinfodb.com/v3/ip-city/?key=02d06daff139466bba306d936a7f55f6aefc3f43b8a121ce0775db5b16b6beb3"."&format=json"));
 
-    function getaddress($lat,$lng)
-    {
-       $url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($lat).','.trim($lng).'&sensor=false';
-       $json = @file_get_contents($url);
-       $data=json_decode($json);
-       $status = $data->status;
-       if($status=="OK")
-       {
-         return $data->results[0]->formatted_address;
-       }
-       else
-       {
-         return false;
-       }
+        //mengubah latitude dan longitude ke alamat jalan
+        // $urls = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($lat).','.trim($lng).'&sensor=false';
+        // $json = @file_get_contents($urls);
+        // $data=json_decode($json);
+        // $status = $data->status;
+        // return $status;
+        // if($status=="OK")
+        // {
+        //   return $data->results[0]->formatted_address;
+        // }
+        // else
+        // {
+        //   return ('error');
+        // }
+
+        return view('user', compact('url'));
     }
 
 }
